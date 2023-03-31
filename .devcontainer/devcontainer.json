@@ -1,0 +1,24 @@
+{
+    "name": "tailscale-dev",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "dev",
+    "workspaceFolder": "/workspace",
+    "userEnvProbe": "loginShell",
+    "updateRemoteUserUID": false,
+    "onCreateCommand": "nix-shell --command 'echo done building nix dev environment'",
+    "forwardPorts": [
+        3000
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "mkhl.direnv",
+                "arrterian.nix-env-selector",
+                "bradlc.vscode-tailwindcss",
+                "unifiedjs.vscode-mdx",
+                "esbenp.prettier-vscode"
+            ]
+        }
+    },
+    "postCreateCommand": "yarn"
+}

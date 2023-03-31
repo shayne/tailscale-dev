@@ -1,0 +1,26 @@
+version: '3'
+services:
+  dev:
+    build:
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        USER_UID: ${USER_UID:-1000}
+        USER_GID: ${USER_GID:-1000}
+    #     environment:
+    #       PATH: /home/user/.nix-profile/bin:/home/user/.local/bin:/usr/local/bin:/usr/bin:/bin
+    environment:
+      PRELOAD_EXTENSIONS: 'arrterian.nix-env-selector'
+    volumes:
+      - ..:/workspace:cached
+      - nix:/nix
+      - home-cache:/home/code/.cache
+    security_opt:
+      - label:disable
+    network_mode: bridge
+    # ports:
+    #   - '3000'
+
+volumes:
+  nix:
+  home-cache:
